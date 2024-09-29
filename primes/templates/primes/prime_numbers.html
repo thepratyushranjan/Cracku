@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Numbers Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 5px 10px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Find Prime Numbers</h1>
+    
+    <!-- Form for the input page -->
+    <p>Enter an integer below to find all prime numbers less than or equal to it.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="number" name="number" id="number" placeholder="Enter an integer" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Output page: If the user has entered a number -->
+    {% if number %}
+        <h2>Prime numbers less than or equal to {{ number }}:</h2>
+        <ul>
+            {% for prime in primes %}
+                <li>{{ prime }}</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'prime_numbers' %}">Try another number</a>
+    {% endif %}
+
+</body>
+</html>
